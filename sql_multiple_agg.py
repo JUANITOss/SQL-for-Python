@@ -11,10 +11,7 @@ query = "SELECT * FROM age_income;"
 # Read the data into a pandas DataFrame using SQLAlchemy connection
 df = pd.read_sql(query, engine)
 
-# Select only numeric columns
-numeric_df = df.select_dtypes(include=['number'])
-
-# Group by 'Marital Status' and compute the mean for numeric columns
-query = numeric_df.groupby(df['Marital Status'], dropna=False).mean()
+query = df.groupby('Marital Status') \
+.agg(Avg_Age=('Age', 'mean'),Total_Income=('Income', 'sum'))
 
 print(query)
