@@ -11,4 +11,5 @@ query = "SELECT * FROM age_income;"
 # Read the data into a pandas DataFrame using SQLAlchemy connection
 df = pd.read_sql(query, engine)
 
+# Getting two columns
 print(df[['Name', 'Marital Status']].head(5))
