@@ -11,6 +11,9 @@ query = "SELECT * FROM age_income;"
 # Read the data into a pandas DataFrame using SQLAlchemy connection
 df = pd.read_sql(query, engine)
 
-query = df.groupby(df['Marital Status'], dropna=False).agg(avg_Income=('Income', 'mean'))
+# counting each group
+query = df.sort_values(['Name', 'Age']).groupby('Marital Status').cumcount()
 
-print(query)
+df['rn'] = query
+
+print(df.sort_values(by='rn'))
